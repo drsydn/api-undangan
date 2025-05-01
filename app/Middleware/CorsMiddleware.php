@@ -21,7 +21,7 @@ final class CorsMiddleware implements MiddlewareInterface
         if (in_array($origin, $allowedOrigins)) {
             $header->set('Access-Control-Allow-Origin', $origin);
         } else {
-            $header->set('Access-Control-Allow-Origin', 'https://your-github-username.github.io');
+            $header->set('Access-Control-Allow-Origin', 'https://drsydn.github.io');
         }
         $header->set('Access-Control-Expose-Headers', 'Authorization, Content-Type, Cache-Control, Content-Disposition');
 
