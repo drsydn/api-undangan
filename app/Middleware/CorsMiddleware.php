@@ -12,7 +12,17 @@ final class CorsMiddleware implements MiddlewareInterface
     public function handle(Request $request, Closure $next)
     {
         $header = respond()->getHeader();
-        $header->set('Access-Control-Allow-Origin', '*');
+        // Ganti wildcard dengan origin GitHub Pages secara eksplisit
+        $allowedOrigins = [
+            'https://drsydn.github.io',
+            'https://gabood.site'
+        ];
+        $origin = $request->server->get('HTTP_ORIGIN');
+        if (in_array($origin, $allowedOrigins)) {
+            $header->set('Access-Control-Allow-Origin', $origin);
+        } else {
+            $header->set('Access-Control-Allow-Origin', 'https://your-github-username.github.io');
+        }
         $header->set('Access-Control-Expose-Headers', 'Authorization, Content-Type, Cache-Control, Content-Disposition');
 
         $vary = $header->has('Vary') ? explode(', ', $header->get('Vary')) : [];
